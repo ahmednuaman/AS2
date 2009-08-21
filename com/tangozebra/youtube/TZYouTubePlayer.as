@@ -91,6 +91,10 @@ class com.tangozebra.youtube.TZYouTubePlayer extends Dispatcher
 			
 			player.setSize(width,height);
 		}
+		else
+		{
+			resizePlayer( width, height );
+		}
 	}
 	
 	public function stopVideo():Void
@@ -138,6 +142,8 @@ class com.tangozebra.youtube.TZYouTubePlayer extends Dispatcher
 		if (player.isPlayerLoaded())
 		{
 			TZTrace.info(NAME + ' loaded');
+			
+			dispatchEvent(new TZYouTubePlayerEvent(TZYouTubePlayerEvent.READY,null,this));
 			
 			if (chromeless)
 			{

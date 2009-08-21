@@ -10,6 +10,7 @@ class com.tangozebra.youtube.TZYouTubePlayerEvent extends Event
 {
 	public static var NAME:String								= 'TZYouTubePlayerEvent';
 	
+	public static var READY:String								= 'playerReady';
 	public static var STATE_CHANGED:String						= 'onStateChange';
 	public static var ERROR:String								= 'onError';
 	public static var PLAYER_PLAYING:String						= 'playerPlaying';
