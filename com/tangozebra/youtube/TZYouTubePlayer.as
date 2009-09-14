@@ -102,6 +102,16 @@ class com.tangozebra.youtube.TZYouTubePlayer extends Dispatcher
 		player.stopVideo();
 	}
 	
+	public function pauseVideo():Void
+	{
+		player.pauseVideo();
+	}
+
+	public function resumeVideo():Void
+	{
+		player.resumeVideo();
+	}
+	
 	private function loadVideo():Void
 	{
 		var url:String = (chromeless ? 'http://www.youtube.com/apiplayer' : 'http://www.youtube.com/v/' + id + '&' + pars);
