@@ -147,11 +147,11 @@ class com.tangozebra.youtube.TZYouTubePlayer extends Dispatcher
 	
 	private function checkPlayerLoaded():Void
 	{
-		TZTrace.info(NAME + ' checking for load (interval) ' + player.isPlayerLoaded());
+		TZTrace.info(NAME + ' checking for load (interval) ' + player.isPlayerLoaded() + ' ' + player);
 		
 		if (player.isPlayerLoaded())
 		{
-			TZTrace.info(NAME + ' loaded');
+			TZTrace.info(NAME + ' loaded ' + player);
 			
 			dispatchEvent(new TZYouTubePlayerEvent(TZYouTubePlayerEvent.READY,null,this));
 			
