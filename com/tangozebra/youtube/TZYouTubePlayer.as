@@ -35,6 +35,7 @@ class com.tangozebra.youtube.TZYouTubePlayer extends Dispatcher
 	private var player:MovieClip;
 	private var parent:MovieClip;
 	private var id:String;
+	private var intervalsId:String;
 	
 	public function TZYouTubePlayer(parent:MovieClip)
 	{
@@ -116,10 +117,15 @@ class com.tangozebra.youtube.TZYouTubePlayer extends Dispatcher
 	private function loadVideo():Void
 	{
 		var url:String = (chromeless ? 'http://www.youtube.com/apiplayer' : 'http://www.youtube.com/v/' + id + '&' + pars);
+		var playerName:String = NAME + 'Player' + (new Date().getTime());
 		
 		TZTrace.info(NAME + ' loading player ' + url);
 		
-		player = parent.createEmptyMovieClip(NAME + 'Player' + (new Date().getTime()),parent.getNextHighestDepth());
+		player = parent.createEmptyMovieClip(playerName,parent.getNextHighestDepth());
+		
+		intervalsId = playerName;
+		
+		intervals[intervalsId] = [ ];
 		
 		parent._visible = false;
 		
@@ -133,15 +139,15 @@ class com.tangozebra.youtube.TZYouTubePlayer extends Dispatcher
 	private function loadInit():Void
 	{
 		TZTrace.info(NAME + ' setting load interval');
-				
-		intervals.push(setInterval(Delegate.create(this,checkPlayerLoaded),500)); 
+		
+		intervals[intervalsId].push(setInterval(Delegate.create(this,checkPlayerLoaded),500)); 
 	}
 	
 	public function destroyPlayer():Void
 	{
 		TZTrace.info(NAME + ' destorying player');
 	
-		intervals.push(setInterval(Delegate.create(this,checkPlayerDestroyed),500));
+		intervals[intervalsId].push(setInterval(Delegate.create(this,checkPlayerDestroyed),500));
 		
 		remove = false;
 	}
@@ -168,9 +174,9 @@ class com.tangozebra.youtube.TZYouTubePlayer extends Dispatcher
 			
 			parent._visible = true;
 			
-			for (var i:Number = 0; i < intervals.length; i++)
+			for (var i:Number = 0; i < intervals[intervalsId].length; i++)
 			{
-				clearInterval(intervals[i]);
+				clearInterval(intervals[intervalsId][i]);
 			}
 			
 			onPlayerReady();
@@ -183,9 +189,9 @@ class com.tangozebra.youtube.TZYouTubePlayer extends Dispatcher
 		
 		if (!player)
 		{
-			for (var i:Number = 0; i < intervals.length; i++)
+			for (var i:Number = 0; i < intervals[intervalsId].length; i++)
 			{
-				clearInterval(intervals[i]);
+				clearInterval(intervals[intervalsId][i]);
 			}
 			
 			init(id,true);
