@@ -42,6 +42,7 @@ class com.tangozebra.youtube.TZYouTubePlayer extends Dispatcher
 		
 		EventDispatcher.initialize(this);
 		
+		System.security.allowDomain( '*' );
 		System.security.allowDomain( 'www.youtube.com' );
 		System.security.allowDomain( 'youtube.com' );
 		System.security.allowDomain( 's.ytimg.com' );
@@ -133,7 +134,7 @@ class com.tangozebra.youtube.TZYouTubePlayer extends Dispatcher
 	{
 		TZTrace.info(NAME + ' setting load interval');
 				
-		intervals.push(setInterval(Delegate.create(this,checkPlayerLoaded),500)); // Fucking AS2. It requires delegate to tell it to look and launch the function checkPlayerLoaded with the scope of the whole class rather than the interval. Dicks.
+		intervals.push(setInterval(Delegate.create(this,checkPlayerLoaded),500)); 
 	}
 	
 	public function destroyPlayer():Void
@@ -147,7 +148,7 @@ class com.tangozebra.youtube.TZYouTubePlayer extends Dispatcher
 	
 	private function checkPlayerLoaded():Void
 	{
-		TZTrace.info(NAME + ' checking for load (interval) ' + player.isPlayerLoaded() + ' ' + player);
+		TZTrace.info(NAME + ' checking for load (interval) ' + player.isPlayerLoaded());
 		
 		if (player.isPlayerLoaded())
 		{
@@ -160,7 +161,7 @@ class com.tangozebra.youtube.TZYouTubePlayer extends Dispatcher
 				player.loadVideoById(id);
 			}
 			
-			player.addEventListener(TZYouTubePlayerEvent.STATE_CHANGED,Delegate.create(this,onPlayerStateChanged)); // Again, we need to scope this. Kick adobe in the nuts.
+			player.addEventListener(TZYouTubePlayerEvent.STATE_CHANGED,Delegate.create(this,onPlayerStateChanged)); 
 			player.addEventListener(TZYouTubePlayerEvent.ERROR,onPlayerError);
 			
 			resizePlayer(playerWidth,playerHeight);
