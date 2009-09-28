@@ -111,7 +111,7 @@ class com.tangozebra.youtube.TZYouTubePlayer extends Dispatcher
 
 	public function resumeVideo():Void
 	{
-		player.resumeVideo();
+		player.playVideo();
 	}
 	
 	private function loadVideo():Void
