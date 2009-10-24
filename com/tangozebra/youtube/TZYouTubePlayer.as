@@ -288,4 +288,44 @@ class com.tangozebra.youtube.TZYouTubePlayer extends Dispatcher
 	{
 		TZTrace.info(NAME + ' error');
 	}
+	
+	public function getCurrentTime():Number
+	{
+		if (player.isPlayerLoaded())
+		{
+			return player.getCurrentTime();
+		}
+	}
+	
+	public function getDuration():Number
+	{
+		if (player.isPlayerLoaded())
+		{
+			return player.getDuration();
+		}
+	}
+	
+	public function getVideoUrl():String
+	{
+		if (player.isPlayerLoaded())
+		{
+			return player.getVideoUrl();
+		}
+	}
+	
+	public function getPlaybackQuality():String
+	{
+		if (player.isPlayerLoaded())
+		{
+			return player.getPlaybackQuality();
+		}
+	}
+	
+	public function setPlaybackQuality(suggestedQuality:String):Void
+	{
+		if (player.isPlayerLoaded())
+		{
+			return player.setPlaybackQuality(suggestedQuality);
+		}
+	}
 }
