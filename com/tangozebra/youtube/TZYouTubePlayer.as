@@ -325,7 +325,7 @@ class com.tangozebra.youtube.TZYouTubePlayer extends Dispatcher
 	{
 		if (player.isPlayerLoaded())
 		{
-			return player.setPlaybackQuality(suggestedQuality);
+			player.setPlaybackQuality(suggestedQuality);
 		}
 	}
 }
